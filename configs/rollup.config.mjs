@@ -262,6 +262,17 @@ export default async args => {
                         exclude: /node_modules/,
                         plugins: [["@babel/plugin-transform-react-jsx", { pragma: "createElement" }]]
                     }
+                ],
+                plugins: [
+                    [
+                      'import',
+                        {
+                            libraryName: 'antd',
+                            libraryDirectory: 'es',
+                            style: 'css',
+                        },
+                        "antd"
+                    ]
                 ]
             }),
             commonjs({

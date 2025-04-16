@@ -1,7 +1,7 @@
 {
   "name": "@databytes/pluggable-widgets-tools",
   "private": false,
-  "version": "10.21.0",
+  "version": "10.21.1",
   "description": "Mendix Pluggable Widgets Tools",
   "engines": {
     "node": ">=20"
@@ -53,6 +53,7 @@
     "ansi-colors": "4.1.1",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^29.0.0",
+    "babel-plugin-import": "^1.13.8",
     "big.js": "^6.0.2",
     "concurrently": "^6.0.0",
     "core-js": "^3.6.5",
