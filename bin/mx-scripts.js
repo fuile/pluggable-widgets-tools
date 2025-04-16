@@ -15,7 +15,7 @@ checkNodeVersion();
 
     const [, currentScriptPath, cmd, ...args] = process.argv;
     const toolsRoot = currentScriptPath.endsWith("pluggable-widgets-tools")
-        ? join(dirname(currentScriptPath), "../@mendix/pluggable-widgets-tools")
+        ? join(dirname(currentScriptPath), "../@fuile/pluggable-widgets-tools")
         : join(dirname(currentScriptPath), "..");
 
     if (args.indexOf("--subprojectPath") > -1) {
@@ -32,7 +32,7 @@ checkNodeVersion();
                 ...process.env,
                 PATH: [process.env.PATH].concat(nodeModulesBins).join(delimiter),
                 // Hack for Windows using NTFS Filesystem, we cannot add platform specific check otherwise GitBash or other linux based terminal on windows will also fail.
-                Path: [process.env.Path].concat(nodeModulesBins).join(delimiter),
+                Path: [process.env.Path].concat(nodeModulesBins).join(delimiter)
             },
             shell: true,
             stdio: "inherit"
