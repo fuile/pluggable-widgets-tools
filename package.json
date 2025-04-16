@@ -1,5 +1,6 @@
 {
-  "name": "@fuile/pluggable-widgets-tools",
+  "name": "@databytes/pluggable-widgets-tools",
+  "private": false,
   "version": "10.21.0",
   "description": "Mendix Pluggable Widgets Tools",
   "engines": {
@@ -9,10 +10,6 @@
   "types": "dist/index.d.ts",
   "bin": {
     "pluggable-widgets-tools": "bin/mx-scripts.js"
-  },
-  "scripts": {
-    "prepare": "shx rm -rf dist && tsc",
-    "test": "jest"
   },
   "files": [
     "bin",

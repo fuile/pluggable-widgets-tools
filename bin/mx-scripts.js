@@ -15,7 +15,7 @@ checkNodeVersion();
 
     const [, currentScriptPath, cmd, ...args] = process.argv;
     const toolsRoot = currentScriptPath.endsWith("pluggable-widgets-tools")
-        ? join(dirname(currentScriptPath), "../@fuile/pluggable-widgets-tools")
+        ? join(dirname(currentScriptPath), "../@databytes/pluggable-widgets-tools")
         : join(dirname(currentScriptPath), "..");
 
     if (args.indexOf("--subprojectPath") > -1) {
