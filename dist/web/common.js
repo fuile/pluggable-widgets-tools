@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.parseInlineStyle = parseInlineStyle;
+exports.executeAction = executeAction;
 function parseInlineStyle(style = "") {
     try {
         return style.split(";").reduce((styleObject, line) => {
@@ -16,3 +17,9 @@ function parseInlineStyle(style = "") {
         return {};
     }
 }
+function executeAction(action, callback) {
+    if (action && action.canExecute && !action.isExecuting) {
+        action.execute();
+        if (callback && typeof callback === "function") callback();
+    }
+};

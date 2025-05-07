@@ -110,6 +110,7 @@
   "devDependencies": {
     "@mendix/generator-widget": ">=8.9.0",
     "@types/xml2js": "^0.4.5",
+    "mendix-client": "^7.15.8",
     "async-mutex": "^0.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

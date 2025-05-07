@@ -1,11 +1,30 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.hideProperties = hideProperties;
 exports.hidePropertyIn = hidePropertyIn;
 exports.hidePropertiesIn = hidePropertiesIn;
 exports.hideNestedPropertiesIn = hideNestedPropertiesIn;
 exports.changePropertyIn = changePropertyIn;
 exports.transformGroupsIntoTabs = transformGroupsIntoTabs;
 exports.moveProperty = moveProperty;
+function hideProperties(properties, key, nestedIndex, nestedKey) {
+    properties.forEach(prop => {
+        if (prop.propertyGroups) {
+            hideProperties(prop.propertyGroups, key, nestedIndex, nestedKey);
+        }
+        (prop.properties || []).forEach((prop, index, array) => {
+            if ((Array.isArray(key) ? key : [key]).includes(prop.key)) {
+                if (nestedIndex === undefined || nestedKey === undefined) {
+                    array.splice(index, 1);
+                } else if (prop.objects) {
+                    hideProperties(prop.objects[nestedIndex].properties, nestedKey);
+                } else if (prop.properties) {
+                    hideProperties(prop.properties[nestedIndex], nestedKey);
+                }
+            }
+        });
+    });
+}
 function hidePropertyIn(propertyGroups, _value, key, nestedPropIndex, nestedPropKey) {
     modifyProperty((_, index, container) => container.splice(index, 1), propertyGroups, key, nestedPropIndex, nestedPropKey);
 }

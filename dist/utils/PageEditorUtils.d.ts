@@ -1,4 +1,5 @@
 import { Properties, Property, PropertyGroup } from "./typings";
+export declare function hideProperties(properties: Properties, key: string | string[], nestedIndex?: number, nestedKey?: string | string[]): void;
 export declare function hidePropertyIn<T, TKey extends keyof T>(propertyGroups: PropertyGroup[], _value: T, key: TKey): void;
 export declare function hidePropertyIn<T, TKey extends keyof T>(propertyGroups: PropertyGroup[], _value: T, key: TKey, nestedPropIndex: number, nestedPropKey: T[TKey] extends Array<infer TChild> ? keyof TChild : never): void;
 export declare function hidePropertiesIn<T>(propertyGroups: PropertyGroup[], _value: T, keys: Array<keyof T>): void;
