@@ -1,7 +1,7 @@
 {
   "name": "@databytes/pluggable-widgets-tools",
   "private": false,
-  "version": "10.21.1",
+  "version": "10.21.2",
   "description": "Mendix Pluggable Widgets Tools",
   "engines": {
     "node": ">=20"

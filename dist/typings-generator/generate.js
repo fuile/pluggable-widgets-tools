@@ -35,9 +35,9 @@ function generateForWidget(widgetXml, widgetName) {
     if (!((_a = widgetXml === null || widgetXml === void 0 ? void 0 : widgetXml.widget) === null || _a === void 0 ? void 0 : _a.properties)) {
         throw new Error("[XML] XML doesn't contains <properties> element");
     }
-    if (widgetXml.widget.$.pluginWidget !== "true") {
-        throw new Error("[XML] Attribute pluginWidget=true not found. Please review your XML");
-    }
+    // if (widgetXml.widget.$.pluginWidget !== "true") {
+    //     throw new Error("[XML] Attribute pluginWidget=true not found. Please review your XML");
+    // }
     const isNative = widgetXml.widget.$.supportedPlatform === "Native";
     const propElements = (_b = widgetXml.widget.properties[0]) !== null && _b !== void 0 ? _b : [];
     const properties = (0, helpers_1.extractProperties)(propElements).filter(prop => { var _a; return (_a = prop === null || prop === void 0 ? void 0 : prop.$) === null || _a === void 0 ? void 0 : _a.key; });

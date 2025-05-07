@@ -30,10 +30,12 @@ import {
     widgetName,
     widgetPackage,
     widgetVersion,
+    isPluginWidget,
     onwarn
 } from "./shared.mjs";
 import { copyLicenseFile, createMpkFile, licenseCustomTemplate } from "./helpers/rollup-helper.mjs";
 import url from "./rollup-plugin-assets.mjs";
+import widget from "./rollup-plugin-widget.mjs";
 
 const { loadConfigFile } = rollupLoadConfigFile;
 const { cp } = shelljs;
@@ -117,6 +119,7 @@ export default async args => {
                 return "this";
             },
             plugins: [
+                widget([widgetPackage, widgetName.toLowerCase(), widgetName].join("."), widgetName, isPluginWidget),
                 ...getClientComponentPlugins(),
                 url({
                     include: imagesAndFonts,
@@ -223,8 +226,8 @@ export default async args => {
     const existingConfigPath = existsSync(customConfigPathJS)
         ? customConfigPathJS
         : existsSync(customConfigPathESM)
-        ? customConfigPathESM
-        : null;
+            ? customConfigPathESM
+            : null;
     if (existingConfigPath != null) {
         const customConfig = await loadConfigFile(existingConfigPath, { ...args, configDefaultConfig: result });
         customConfig.warnings.flush();
@@ -238,12 +241,12 @@ export default async args => {
             nodeResolve({ preferBuiltins: false, mainFields: ["module", "browser", "main"] }),
             isTypescript
                 ? typescript({
-                      noEmitOnError: !args.watch,
-                      sourceMap: config.sourceMaps,
-                      inlineSources: config.sourceMaps,
-                      target: "es2022", // we transpile the result with babel anyway, see below
-                      exclude: ["**/__tests__/**/*"]
-                  })
+                    noEmitOnError: !args.watch,
+                    sourceMap: config.sourceMaps,
+                    inlineSources: config.sourceMaps,
+                    target: "es2022", // we transpile the result with babel anyway, see below
+                    exclude: ["**/__tests__/**/*"]
+                })
                 : null,
             // Babel can transpile source JS and resulting JS, hence are input/output plugins. The good
             // practice is to do the most of conversions on resulting code, since then we ensure that
@@ -265,7 +268,7 @@ export default async args => {
                 ],
                 plugins: [
                     [
-                      'import',
+                        'import',
                         {
                             libraryName: 'antd',
                             libraryDirectory: 'es',
@@ -291,29 +294,29 @@ export default async args => {
             }),
             config.transpile
                 ? getBabelOutputPlugin({
-                      sourceMaps: config.sourceMaps,
-                      babelrc: false,
-                      compact: false,
-                      ...(config.babelConfig || {})
-                  })
+                    sourceMaps: config.sourceMaps,
+                    babelrc: false,
+                    compact: false,
+                    ...(config.babelConfig || {})
+                })
                 : null,
             image(),
             production ? terser() : null,
             config.licenses
                 ? license({
-                      thirdParty: {
-                          includePrivate: true,
-                          output: [
-                              {
-                                  file: join(outDir, "dependencies.txt")
-                              },
-                              {
-                                  file: join(outDir, "dependencies.json"),
-                                  template: licenseCustomTemplate
-                              }
-                          ]
-                      }
-                  })
+                    thirdParty: {
+                        includePrivate: true,
+                        output: [
+                            {
+                                file: join(outDir, "dependencies.txt")
+                            },
+                            {
+                                file: join(outDir, "dependencies.json"),
+                                template: licenseCustomTemplate
+                            }
+                        ]
+                    }
+                })
                 : null,
             // We need to create .mpk and copy results to test project after bundling is finished.
             // In case of a regular build is it is on `writeBundle` of the last config we define

@@ -21,6 +21,7 @@ const widgetPackageJson = JSON.parse(readFileSync(join(sourcePath, "package.json
 export const widgetName = widgetPackageJson.widgetName;
 export const widgetPackage = widgetPackageJson.packagePath;
 export const widgetVersion = widgetPackageJson.version;
+export const isPluginWidget = widgetPackageJson.pluginWidget;
 if (!widgetName || !widgetPackageJson) {
     throw new Error("Widget does not define widgetName in its package.json");
 }
